@@ -1,0 +1,51 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#ffb3b6',
+        'primary-container': '#e11d48',
+        secondary: '#ffb3b6',
+        tertiary: '#74d8bd',
+        background: '#131313',
+        surface: '#131313',
+        'surface-dim': '#131313',
+        'surface-bright': '#3a3939',
+        'surface-container-lowest': '#0e0e0e',
+        'surface-container-low': '#1c1b1b',
+        'surface-container': '#201f1f',
+        'surface-container-high': '#2a2a2a',
+        'surface-container-highest': '#353534',
+        'surface-variant': '#353534',
+        outline: '#ac8889',
+        'outline-variant': '#5c3f40',
+        error: '#ffb4ab',
+        'error-container': '#93000a',
+        'on-background': '#e5e2e1',
+        'on-surface': '#e5e2e1',
+        'on-surface-variant': '#e5bdbe',
+        'on-primary': '#68001a',
+        'on-primary-container': '#fffaf9',
+        'on-secondary-container': '#ff9da3',
+        'on-tertiary': '#00382d',
+        'tertiary-container': '#00836c',
+      },
+      fontFamily: {
+        headline: ['Manrope', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        label: ['Inter', 'sans-serif'],
+      },
+      borderRadius: {
+        DEFAULT: '0.125rem',
+        lg: '0.25rem',
+        xl: '0.5rem',
+        full: '0.75rem',
+      },
+      boxShadow: {
+        glow: '0 8px 32px rgba(172, 136, 137, 0.08)',
+      },
+    },
+  },
+  plugins: [],
+}
