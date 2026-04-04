@@ -1,0 +1,8 @@
+Test Case ID;Module;Test Scenario;Test Steps;Expected Result;Actual Result;Status;Type
+TC_015;Performance;Dashboard load time;Login | Open Dashboard;Loads within acceptable time;Pass;Pass;Non-Functional
+TC_016;Performance;Map rendering speed;Login | Open Dashboard;Map loads smoothly;Pass;Pass;Non-Functional
+TC_017;Security;Unauthorized access;Open /app/dashboard without login;Redirect to login page;Pass;Pass;Non-Functional
+TC_018;Security;Invalid session handling;Use invalid session token;Access denied;Pass;Pass;Non-Functional
+TC_019;Usability;Navigation highlighting;Navigate between pages;Correct tab highlighted;Pass;Pass;Non-Functional
+TC_020;Usability;Button feedback;Perform actions;Buttons show response/feedback;Pass;Pass;Non-Functional
+TC_021;Reliability;System stability;Use system continuously;System remains stable;Pass;Pass;Non-Functional

@@ -1,0 +1,15 @@
+Test Case ID;Module;Test Scenario;Test Steps;Expected Result;Actual Result;Status;Type
+TC_001;Authentication;Login with valid admin credentials;Open /login | Enter valid email and password | Click Login;User is redirected to dashboard;Pass;Pass;Functional
+TC_002;Authentication;Login with invalid credentials;Open /login | Enter wrong password | Click Login;Error message displayed;Pass;Pass;Functional
+TC_003;Authentication;Logout from system;Login | Click Sign Out;User redirected to login page;Pass;Pass;Functional
+TC_004;Robot Management;View robot list;Login | Navigate to Robots page;Robot list displayed;Pass;Pass;Functional
+TC_005;Robot Management;Select robot;Login | Open Robots | Click robot;Robot details updated;Pass;Pass;Functional
+TC_006;Robot Management;Emergency stop;Login | Open Dashboard | Click E-Stop;Robot enters error/emergency state;Pass;Pass;Functional
+TC_007;Robot Management;Clear emergency;Login | Click Clear Emergency;Robot returns to normal state;Pass;Pass;Functional
+TC_008;Task Management;Create task;Login | Open Tasks | Select source and destination | Submit;Task successfully created;Pass;Pass;Functional
+TC_009;Task Management;Auto assign robot;Login | Create task with auto assign;Robot automatically assigned;Pass;Pass;Functional
+TC_010;Warehouse Map;Load map;Login | Open Dashboard;Map loads successfully;Pass;Pass;Functional
+TC_011;Warehouse Map;Select robot on map;Login | Click robot marker;Robot details shown;Pass;Pass;Functional
+TC_012;Admin Panel;Create user;Login as admin | Open Admin | Add user;User created successfully;Pass;Pass;Functional
+TC_013;Admin Panel;Edit user;Login as admin | Edit user details;User updated successfully;Pass;Pass;Functional
+TC_014;Admin Panel;Delete user;Login as admin | Delete user;User removed successfully;Pass;Pass;Functional
