@@ -9,8 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/your-username/sokobot/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge&logo=github" alt="Build Status"></a>
-  <a href="https://github.com/your-username/sokobot/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License"></a>
+  <a href="https://github.com/gaminization/sokobot/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License"></a>
   <a href="https://python.org"><img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python" alt="Python Version"></a>
   <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node.js-20+-green?style=for-the-badge&logo=nodedotjs" alt="Node.js Version"></a>
   <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI"></a>
@@ -121,7 +120,7 @@ cd frontend && npm run build
 ---
 
 <p align="center">
-  Made with ❤️ by the Sokobot Team. 
+  Made with ❤️ for Sokobot - Warehouse Robot Management System. 
   <br/>
   <a href="./SECURITY.md">Security</a> • <a href="./CODE_OF_CONDUCT.md">Code of Conduct</a>
 </p>

@@ -15,9 +15,9 @@ We take the security of Sokobot very seriously. If you discover any security vul
 
 **To report a vulnerability:**
 
-1. Send an email to **security@sokobot.com** (replace with actual contact in production) detailing the vulnerability.
+1. Report the issue to the repository maintainers via GitHub security advisories or issue tracking.
 2. Include clear steps to reproduce the issue.
-3. We will acknowledge receipt of your vulnerability report within 48 hours and strive to send you regular updates about our progress.
+3. We will acknowledge receipt of your vulnerability report as soon as possible and strive to send you regular updates about our progress.
 
 ### Scope
 
