@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="./docs/sokobot_demo.gif" alt="Sokobot Working Demo" width="720">
-</p>
-
 <h1 align="center">Sokobot</h1>
 
 <p align="center">
@@ -29,6 +25,14 @@
 - **🚦 Intelligent Allocation:** Auto-assignment algorithms that dispatch the nearest idle robot with sufficient battery.
 - **📊 Real-time Dashboard:** Live operational snapshot, KPIs, and warehouse map visualization.
 - **⚡ Background Simulation Engine:** Built-in processing for robot movement, task progression, and error recovery.
+
+---
+
+## 🎬 Application Demo
+
+<p align="center">
+  <img src="./docs/sokobot_demo.gif" alt="Sokobot Working Demo" width="800">
+</p>
 
 ---
 
