@@ -1,108 +1,125 @@
-# INSTALL
+# 🛠️ Installation & Setup Guide
 
-## Prerequisites
+Welcome to the **Sokobot** installation guide! This document will walk you through the process of setting up the Warehouse Robot Management System on your local machine for development and testing.
 
-- Python 3.10+
-- Node.js 20+
-- PostgreSQL 14+ for preferred production/dev database
-- `pip`, `npm`, and `alembic`
+---
 
-## 1. Configure environment
+## 📋 Prerequisites
 
-Copy the examples you want to use:
+Before you begin, ensure you have the following installed:
+
+- **[Python 3.10+](https://www.python.org/downloads/)**
+- **[Node.js 20+](https://nodejs.org/)**
+- **[PostgreSQL 14+](https://www.postgresql.org/)** (Recommended for production/dev)
+- Basic CLI tools: `pip`, `npm`, and `alembic`
+
+---
+
+## ⚙️ 1. Configure Environment
+
+Start by setting up your environment variables. We provide templates for both the backend and frontend.
 
 ```bash
+# Copy backend environment template
 cp .env.example .env
+
+# Copy frontend environment template
 cp frontend/.env.example frontend/.env
 ```
 
-Important defaults in `.env`:
+### 🔑 Important Variables in `.env`:
+- `DATABASE_URL`: Ensure this points to your database. (e.g., `postgresql+psycopg://wrms:wrms@localhost:5432/wrms`)
+- `SECRET_KEY`: **Must** be replaced before shared or production use!
+- `AUTO_SEED=true`: Automatically seeds admin/operator users, robots, stations, and waypoints on first boot.
 
-- `DATABASE_URL`
-  Preferred: `postgresql+psycopg://wrms:wrms@localhost:5432/wrms`
-- `SECRET_KEY`
-  Replace before shared or production use.
-- `AUTO_SEED=true`
-  Seeds admin/operator users, robots, stations, and waypoints on first boot.
+---
 
-## 2. Backend setup
+## 🏗️ 2. Backend Setup
 
-Install dependencies:
+Our backend is powered by FastAPI. Follow these steps to get it running:
 
-```bash
-pip install -r backend/requirements.txt
-```
+1. **Install Python dependencies:**
+   ```bash
+   pip install -r backend/requirements.txt
+   ```
 
-Run migrations:
+2. **Run Database Migrations:**
+   ```bash
+   alembic -c backend/alembic.ini upgrade head
+   ```
 
-```bash
-alembic -c backend/alembic.ini upgrade head
-```
+3. **Start the API Server:**
+   ```bash
+   uvicorn backend.main:app --reload
+   ```
 
-Start the API:
+📍 **Endpoints:**
+- Base API: `http://localhost:8000`
+- Swagger UI (Docs): `http://localhost:8000/docs`
 
-```bash
-uvicorn backend.main:app --reload
-```
+---
 
-The backend will be available at:
+## 💻 3. Frontend Setup
 
-- `http://localhost:8000`
-- Swagger UI: `http://localhost:8000/docs`
+The frontend command-center is built with React, Vite, and Tailwind CSS.
 
-## 3. Frontend setup
+1. **Install Node dependencies:**
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-Install frontend dependencies:
+2. **Run the Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-```bash
-cd frontend
-npm install
-```
+📍 **Endpoint:**
+- Frontend App: `http://localhost:5173`
 
-Run the dev server:
+---
 
-```bash
-npm run dev
-```
+## 🔐 4. Default Login Credentials
 
-The frontend will be available at:
+If `AUTO_SEED` was set to true, the following accounts are ready to use:
 
-- `http://localhost:5173`
+| Role | Email | Password |
+| :--- | :--- | :--- |
+| **Admin** | `admin@wrms.com` | `admin123` |
+| **Operator** | `operator@wrms.com` | `operator123` |
 
-## 4. Default login
+---
 
-- Admin
-  `admin@wrms.com` / `admin123`
-- Operator
-  `operator@wrms.com` / `operator123`
+## 🧪 5. Running Tests
 
-## 5. Run tests
+We strongly recommend running tests to verify your setup.
 
-Backend/API tests:
-
+### Backend/API Tests:
 ```bash
 pytest -q
 ```
 
-Frontend production build:
-
+### Frontend Production Build Test:
 ```bash
 cd frontend
 npm run build
 ```
 
-## 6. SQLite fallback
+---
 
-If you want a zero-dependency local run, keep:
+## 🗄️ 6. SQLite Fallback (Zero-Dependency Run)
+
+If you prefer a zero-dependency local run without PostgreSQL, you can use SQLite. Just update your `.env`:
 
 ```env
 DATABASE_URL=sqlite:///./wrms.db
 ```
+*Note: This works perfectly for local development, tests, and Alembic migration verification.*
 
-This works for local development, tests, and Alembic migration verification.
+---
 
-## 7. Notes
+## 📝 7. Additional Notes
 
-- The simulation engine runs in the FastAPI process and advances robot/task state every `SIMULATION_TICK_SECONDS`.
-- For production deployment, prefer PostgreSQL and a non-default `SECRET_KEY`.
-- The frontend expects the API under `VITE_API_BASE_URL`, defaulting to `http://localhost:8000/api`.
+- ⏳ **Simulation Engine:** The simulation engine runs directly within the FastAPI process. It advances robot and task states every `SIMULATION_TICK_SECONDS`.
+- 🚀 **Production Deployment:** Always prefer PostgreSQL over SQLite and ensure a secure, non-default `SECRET_KEY`.
+- 🔗 **API Connectivity:** The frontend expects the API under the `VITE_API_BASE_URL` environment variable, which defaults to `http://localhost:8000/api`.

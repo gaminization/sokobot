@@ -1,132 +1,147 @@
-# API DOCS
+# 🔌 Sokobot API Reference
 
-Base URL:
+Welcome to the **Sokobot API documentation**. Our backend provides a robust suite of RESTful endpoints to manage the warehouse simulation, track robots, allocate tasks, and monitor system health.
 
-- `http://localhost:8000/api`
+---
 
-Auth:
+## 🌐 Base Information
 
-- Bearer JWT in `Authorization: Bearer <token>`
+- **Base URL:** `http://localhost:8000/api`
+- **Swagger UI:** `http://localhost:8000/docs`
 
-Swagger:
+### 🔐 Authentication
 
-- `http://localhost:8000/docs`
+All protected endpoints require a JWT token passed in the `Authorization` header.
+> **Format:** `Authorization: Bearer <token>`
 
-## Auth
+---
 
-- `POST /auth/signup`
-  Register a new operator account.
-- `POST /auth/login`
-  Obtain JWT token and current user payload.
-- `GET /auth/me`
-  Return the current authenticated user.
+## 🔑 Auth
 
-## Users
+Endpoints for managing authentication and sessions.
 
-- `GET /users/`
-  Admin-only user directory.
-- `POST /users/`
-  Admin-only user creation.
-- `PATCH /users/{user_id}`
-  Admin-only user update.
-- `DELETE /users/{user_id}`
-  Admin-only user deletion.
-- `GET /users/profile`
-  Current user profile.
-- `PATCH /users/profile`
-  Update current user name/password.
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/auth/signup` | Register a new operator account. |
+| `POST` | `/auth/login` | Obtain JWT token and current user payload. |
+| `GET` | `/auth/me` | Return the current authenticated user. |
 
-## Waypoints
+---
 
-- `GET /waypoints/`
-  List configured warehouse nodes.
-- `POST /waypoints/`
-  Admin-only waypoint creation.
-- `PATCH /waypoints/{waypoint_id}`
-  Admin-only waypoint update.
-- `DELETE /waypoints/{waypoint_id}`
-  Admin-only waypoint removal.
+## 👥 Users
 
-## Robots
+Manage user accounts, roles, and profiles.
 
-- `GET /robots/`
-  List robots with active task summary.
-- `GET /robots/{robot_id}`
-  Get robot details.
-- `POST /robots/`
-  Admin-only robot creation.
-- `PATCH /robots/{robot_id}`
-  Admin-only robot update.
-- `DELETE /robots/{robot_id}`
-  Admin-only robot deletion.
-- `POST /robots/{robot_id}/reset`
-  Move robot from `ERROR` into `RECOVERY`.
-- `POST /robots/{robot_id}/charge`
-  Send robot to the nearest available charging station.
-- `POST /robots/{robot_id}/manual-control`
-  Apply a simulated manual movement or rotation command.
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/users/` | User directory. | 🛡️ Admin |
+| `POST` | `/users/` | User creation. | 🛡️ Admin |
+| `PATCH` | `/users/{user_id}` | User update. | 🛡️ Admin |
+| `DELETE` | `/users/{user_id}` | User deletion. | 🛡️ Admin |
+| `GET` | `/users/profile` | Current user profile. | All |
+| `PATCH` | `/users/profile` | Update current user name/password. | All |
 
-## Tasks
+---
 
-- `GET /tasks/`
-  List task queue entries.
-- `GET /tasks/{task_id}`
-  Get task details.
-- `POST /tasks/`
-  Create a task. Supports manual assignment or auto-assignment.
-- `PATCH /tasks/{task_id}`
-  Update task metadata or manually reassign.
-- `POST /tasks/{task_id}/cancel`
-  Cancel a task and release the robot if needed.
-- `DELETE /tasks/{task_id}`
-  Delete inactive task records.
+## 📍 Waypoints
 
-## Charging Stations
+Manage the warehouse nodes and paths.
 
-- `GET /charging-stations/`
-  List stations and occupancy.
-- `GET /charging-stations/sessions`
-  List recent charging sessions.
-- `POST /charging-stations/`
-  Admin-only station creation.
-- `PATCH /charging-stations/{station_id}`
-  Admin-only station update.
-- `DELETE /charging-stations/{station_id}`
-  Admin-only station deletion.
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/waypoints/` | List configured warehouse nodes. | All |
+| `POST` | `/waypoints/` | Waypoint creation. | 🛡️ Admin |
+| `PATCH` | `/waypoints/{waypoint_id}`| Waypoint update. | 🛡️ Admin |
+| `DELETE`| `/waypoints/{waypoint_id}`| Waypoint removal. | 🛡️ Admin |
 
-## Alerts and Logs
+---
 
-- `GET /alerts/`
-  List alerts.
-- `POST /alerts/{alert_id}/acknowledge`
-  Mark an alert as read/acknowledged.
-- `GET /logs/`
-  List recent system log entries.
+## 🤖 Robots
 
-## Dashboard and Map
+Interact with the robot fleet and control lifecycle states.
 
-- `GET /dashboard/snapshot`
-  Full command-center payload with KPIs, robots, tasks, stations, alerts, and recent logs.
-- `GET /dashboard/map`
-  Map-focused payload for robots, stations, and routes.
-- `GET /dashboard/kpis`
-  KPI-only summary.
-- `WS /dashboard/ws`
-  Live dashboard stream endpoint.
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/robots/` | List robots with active task summary. |
+| `GET` | `/robots/{robot_id}` | Get specific robot details. |
+| `POST` | `/robots/` | 🛡️ Admin: Robot creation. |
+| `PATCH` | `/robots/{robot_id}` | 🛡️ Admin: Robot update. |
+| `DELETE` | `/robots/{robot_id}` | 🛡️ Admin: Robot deletion. |
+| `POST` | `/robots/{robot_id}/reset` | Move robot from `ERROR` into `RECOVERY`. |
+| `POST` | `/robots/{robot_id}/charge` | Send robot to the nearest available charging station. |
+| `POST` | `/robots/{robot_id}/manual-control` | Apply simulated manual movement/rotation command. |
 
-## System Controls
+---
 
-- `POST /system/pause`
-  Pause new task allocation.
-- `POST /system/resume`
-  Resume task allocation.
-- `POST /system/emergency-stop`
-  Trigger fleet-wide emergency stop behavior.
-- `POST /system/clear-emergency`
-  Clear emergency-stop mode.
+## 📦 Tasks
 
-## Notes on simulation
+Manage the operational queue and task allocations.
 
-- New tasks without a manual robot assignment remain `PENDING` until the allocator picks the best eligible robot.
-- The simulation engine advances robot positions, battery levels, charging behavior, and task lifecycle automatically.
-- Robot error recovery is modeled through explicit reset -> recovery -> idle transitions.
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/tasks/` | List task queue entries. |
+| `GET` | `/tasks/{task_id}` | Get specific task details. |
+| `POST` | `/tasks/` | Create a task (Supports manual or auto-assignment). |
+| `PATCH` | `/tasks/{task_id}` | Update task metadata or manually reassign. |
+| `POST` | `/tasks/{task_id}/cancel` | Cancel a task and release the robot if needed. |
+| `DELETE` | `/tasks/{task_id}` | Delete inactive task records. |
+
+---
+
+## 🔋 Charging Stations
+
+Manage charging infrastructure and view charging history.
+
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/charging-stations/` | List stations and current occupancy. | All |
+| `GET` | `/charging-stations/sessions` | List recent charging sessions. | All |
+| `POST` | `/charging-stations/` | Station creation. | 🛡️ Admin |
+| `PATCH` | `/charging-stations/{station_id}` | Station update. | 🛡️ Admin |
+| `DELETE`| `/charging-stations/{station_id}` | Station deletion. | 🛡️ Admin |
+
+---
+
+## 🚨 Alerts & 📜 Logs
+
+System-wide monitoring and observability endpoints.
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/alerts/` | List all system alerts. |
+| `POST` | `/alerts/{alert_id}/acknowledge`| Mark an alert as read/acknowledged. |
+| `GET` | `/logs/` | List recent system log entries. |
+
+---
+
+## 📊 Dashboard & Map
+
+Endpoints specifically tailored for frontend command-center consumption.
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/dashboard/snapshot` | Full payload (KPIs, robots, tasks, stations, alerts, logs). |
+| `GET` | `/dashboard/map` | Map-focused payload (robots, stations, routes). |
+| `GET` | `/dashboard/kpis` | KPI-only summary. |
+| `WS` | `/dashboard/ws` | Live dashboard stream (WebSocket). |
+
+---
+
+## 🛑 System Controls
+
+Global system state and emergency management.
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/system/pause` | Pause new task allocation. |
+| `POST` | `/system/resume` | Resume task allocation. |
+| `POST` | `/system/emergency-stop` | Trigger fleet-wide emergency stop behavior. |
+| `POST` | `/system/clear-emergency`| Clear emergency-stop mode. |
+
+---
+
+## 🧠 Notes on Simulation Behavior
+
+- **Auto-Allocation:** New tasks without a manual robot assignment remain `PENDING` until the system allocator picks the best eligible robot.
+- **Autonomous Lifecycle:** The simulation engine advances robot positions, battery levels, charging behavior, and task lifecycles automatically on every tick.
+- **Error Handling:** Robot error recovery is explicitly modeled through transitions: `ERROR` ➡️ `RESET` ➡️ `RECOVERY` ➡️ `IDLE`.
