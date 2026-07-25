@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/home/gaminizer/.gemini/antigravity-ide/brain/08a144de-de22-4c2a-82c7-14240d24307a/sokobot_logo_1784953377884.png" alt="Sokobot Logo" width="350">
+  <img src="./docs/sokobot_demo.gif" alt="Sokobot Working Demo" width="720">
 </p>
 
 <h1 align="center">Sokobot</h1>
